@@ -6,10 +6,11 @@
 const CARNAVAL_DATA = {
   standInfo: {
     titulo: "Carnaval de Negros y Blancos de Pasto",
-    subtitulo: "Feria de la Ciencia y la Cultura",
+    subtitulo: "Feria de la Ciencia Ambiental 2026",
     lema: "¡Que viva Pasto, Carajo! 🎭",
-    expositor: "Stand de Exposición Escolar",
-    institucion: "Feria Científica y Cultural",
+    expositor: "Gabriel Matías Jiménez Molina",
+    institucion: "Liceo de la Merced Maridíaz",
+    proyecto: "Chivita Carnavalera",
     descripcionStand: "Escanea los códigos QR de la cartelera para descubrir la magia, los artesanos y la música de una de las fiestas más alegres de Colombia y Patrimonio de la Humanidad."
   },
 
@@ -22,18 +23,21 @@ const CARNAVAL_DATA = {
   categorias: [
     {
       id: "carrozas",
-      titulo: "¿Qué es una Carroza?",
-      nombreCorto: "Carrozas",
-      subtitulo: "Monumentos Rodantes de Arte y Mecatrónica",
+      titulo: "Maestro Zambrano y las Carrozas",
+      nombreCorto: "Maestro Zambrano",
+      subtitulo: "El Rey de las Carrozas y la Escultura",
       icono: "🎭",
       colorPrimario: "#E91E63", // Rosa festivo
       colorGradiente: "linear-gradient(135deg, #FF4081, #C2185B)",
-      resumen: "Son gigantescas esculturas móviles construidas por maestros artesanos con papel maché, madera, fibra y arcilla. ¡Tienen motores y sistemas mecánicos que hacen que sus cabezas, ojos y alas cobren vida!",
+      imagen: "assets/img/maestro_zambrano_y_matias.jpeg",
+      imagenCaption: "Gabriel Matías junto al Maestro Zambrano en el taller de escultura y carrozas",
+      badgeLabel: "🏆 Rey de las Carrozas",
+      resumen: "Homenaje al Maestro Alfonso Zambrano Payán (ganador de 18 primeros lugares y creador de las carrozas con movimiento) y a la dinastía artesanal que da vida a los monumentos rodantes del 6 de enero.",
       puntosClave: [
-        { label: "📏 Tamaño Monumental", desc: "Miden hasta 8 metros de alto y 16 metros de largo, requiriendo un tractor para halarlas." },
-        { label: "⏳ Tiempo de Creación", desc: "Los artesanos y sus familias trabajan de 4 a 6 meses en talleres secretos preparando cada detalle." },
-        { label: "📅 Día de Desfile", desc: "Son las reinas del 6 de enero en el Gran Desfile Magno por la Senda del Carnaval." },
-        { label: "⚙️ Mecatrónica y Arte", desc: "Integran poleas, motores y electrónica para simular respiración, parpadeo y movimientos mágicos." }
+        { label: "🏆 Récord de 18 Primeros Puestos", desc: "El Maestro Alfonso Zambrano ganó 14 años consecutivos y 18 veces el primer premio de carrozas con obras legendarias como 'Pegaso'." },
+        { label: "⚙️ Creador de Carrozas en Movimiento", desc: "Fue el visionario que incorporó motores y poleas mecánicas para que las esculturas parpadearan y se movieran en la senda." },
+        { label: "🪵 Maestro de la Talla en Madera", desc: "Escultor insigne de Colombia, autor de monumentales cristos y de la histórica urna de San Pedro Claver en Cartagena." },
+        { label: "📏 Tamaño y Fantasía", desc: "Las carrozas miden hasta 8 metros de alto y 16 metros de largo, esculpidas con papel maché, madera, arcilla y fibra." }
       ],
       fraseDestacada: "«En cada carroza viaja el alma, la fantasía y el esfuerzo incansable de los artesanos de Pasto.»",
       videos: {
@@ -44,10 +48,10 @@ const CARNAVAL_DATA = {
           descripcion: "Explicación grabada por el estudiante para la feria."
         },
         carnaval: {
-          titulo: "Carrozas Monumentales en la Senda",
+          titulo: "Carrozas Monumentales en la Senda (Desfile Magno)",
           tipo: "youtube",
-          url: "https://www.youtube-nocookie.com/embed/6i2n1-u1F24", // Video ilustrativo de ejemplo
-          descripcion: "Mira las impresionantes carrozas desfilando con sus movimientos mecánicos."
+          url: "https://www.youtube.com/watch?v=t2Pr5_9BQ2I", // Desfile Magno de Carrozas Monumentales
+          descripcion: "Mira las impresionantes carrozas gigantes desfilando con sus movimientos mecánicos."
         }
       }
     },
@@ -75,10 +79,10 @@ const CARNAVAL_DATA = {
           descripcion: "El niño explica cómo los instrumentos alegran la fiesta."
         },
         carnaval: {
-          titulo: "Murgas del Carnaval en Acción",
+          titulo: "Murgas de Metales y Maderas en Acción",
           tipo: "youtube",
-          url: "https://www.youtube-nocookie.com/embed/5aXWzB69qG0",
-          descripcion: "Músicos y comparsas llenando de melodías la senda del carnaval."
+          url: "https://www.youtube.com/watch?v=0t8M2Ln3xCs",
+          descripcion: "Músicos y comparsas llenando de sonsureño y melodías la senda del carnaval."
         }
       }
     },
@@ -106,41 +110,44 @@ const CARNAVAL_DATA = {
           descripcion: "El niño expone cómo las comparsas narran historias."
         },
         carnaval: {
-          titulo: "Desfile de Comparsas Tradicionales",
+          titulo: "Desfile de Comparsas y Disfraces",
           tipo: "youtube",
-          url: "https://www.youtube-nocookie.com/embed/Z0b70kU1-0Q",
-          descripcion: "Bailes, máscaras y disfraces tradicionales en acción."
+          url: "https://www.youtube.com/watch?v=XUYTUl4a5aE",
+          descripcion: "Bailes, máscaras, teatro callejero y disfraces tradicionales en acción."
         }
       }
     },
     {
-      id: "colectivos",
-      titulo: "Colectivos Coreográficos",
-      nombreCorto: "Colectivos",
-      subtitulo: "Canto a la Tierra y Rito Andino",
-      icono: "🎨",
-      colorPrimario: "#00BCD4", // Turquesa andino
-      colorGradiente: "linear-gradient(135deg, #4DD0E1, #0097A7)",
-      resumen: "Grandes agrupaciones de más de 200 danzantes y músicos tocando zampoñas, sikus y bombos al unísono. Es el desfile más espiritual del Carnaval, homenajeando a la Madre Tierra (Pachamama).",
+      id: "pericles",
+      titulo: "Pericles Carnaval",
+      nombreCorto: "Pericles Carnaval",
+      subtitulo: "El Alcalde de la Alegría y el Bando Festivo",
+      icono: "🎩",
+      colorPrimario: "#FF6D00", // Ámbar dorado festivo
+      colorGradiente: "linear-gradient(135deg, #FF9100, #E65100)",
+      imagen: "assets/img/periclesymati.jpeg",
+      imagenCaption: "Gabriel Matías junto a Pericles Carnaval (Anfitrión del Carnaval de Pasto)",
+      badgeLabel: "🎩 Personaje Insignia",
+      resumen: "Personaje emblemático y anfitrión supremo del Carnaval de Negros y Blancos. Cada 4 de enero, en la Llegada de la Familia Castañeda, toma posesión simbólica de Pasto, recibe las Llaves de la Ciudad y proclama el Bando del Carnaval, decretando la prohibición total de la tristeza y ordenando el goce sano, fraterno y alegre de la fiesta.",
       puntosClave: [
-        { label: "🌍 Canto a la Tierra", desc: "Desfilan el 3 de enero, cruzando la ciudad vestidos con finos trajes andinos." },
-        { label: "💨 Fuerza de Viento", desc: "Cientos de zampoñas y quenas sonando juntas producen un sonido potente y sobrecogedor." },
-        { label: "📐 Coreografías Geométricas", desc: "Forman espirales, círculos y líneas que evocan la simbología indígena precolombina." },
-        { label: "🌾 Respeto a la Naturaleza", desc: "Sus letras y danzas agradecen las cosechas y el agua de la cordillera de los Andes." }
+        { label: "📜 La Proclama del Bando", desc: "Decreto festivo en verso donde Pericles arrebata el mando a la rutina y declara que la única ley válida en Pasto es la alegría, el juego limpio y el respeto." },
+        { label: "🔑 Las Llaves de la Ciudad", desc: "El alcalde de Pasto le entrega simbólicamente las llaves de la ciudad, ungiéndolo como el 'Alcalde Festivo' que rige durante todo el Carnaval." },
+        { label: "🎩 Elegancia, Chistera y Frac", desc: "Luce con porte su sombrero de copa alta, levita de gala, banda carnavalera y bastón de mando, derrochando simpatía, cortesía y humor andino." },
+        { label: "🎭 Origen Popular e Histórico", desc: "Surgió a mediados del siglo XX en los carnavales estudiantiles, inspirado en el célebre estadista y orador griego Pericles y en los pregoneros del pueblo." }
       ],
-      fraseDestacada: "«Un rugido de zampoñas que retumba en las faldas del Volcán Galeras.»",
+      fraseDestacada: "«¡Por mandato de este servidor, queda terminantemente prohibida la tristeza y decretado el goce fraternal en San Juan de Pasto!» — Pericles Carnaval",
       videos: {
         nino: {
-          titulo: "El Expositor Explica: Colectivos Coreográficos",
+          titulo: "El Expositor Explica: ¿Quién es Pericles Carnaval?",
           tipo: "local_o_youtube",
-          url: "",
-          descripcion: "El niño describe el homenaje a la Madre Tierra."
+          url: "assets/video/presentacion_pericles.mp4",
+          descripcion: "Gabriel Matías presenta la historia, el sombrero de copa y el significado de Pericles Carnaval como símbolo de alegría y hospitalidad."
         },
         carnaval: {
-          titulo: "Desfile Canto a la Tierra",
+          titulo: "Pericles Carnaval da la orden de gozar (Lectura del Bando)",
           tipo: "youtube",
-          url: "https://www.youtube-nocookie.com/embed/9BqW_EaY3e8",
-          descripcion: "Centenares de zampoñeros y danzantes en la senda."
+          url: "https://www.youtube.com/watch?v=7tIUKWqnRgs",
+          descripcion: "Desfile del 4 de enero: Llegada de la Familia Castañeda y proclamación oficial del inicio de las festividades en San Juan de Pasto."
         }
       }
     },
@@ -168,10 +175,10 @@ const CARNAVAL_DATA = {
           descripcion: "El sentido cultural de pintarse y compartir como hermanos."
         },
         carnaval: {
-          titulo: "El Juego de Negros y Blancos",
+          titulo: "El Juego de Negros y Blancos en Pasto",
           tipo: "youtube",
-          url: "https://www.youtube-nocookie.com/embed/fD3q8yL-U0I",
-          descripcion: "La emoción, el talco, la espuma y la fiesta en las calles."
+          url: "https://www.youtube.com/watch?v=rcMJmNxP5ig",
+          descripcion: "La emoción, el talco, la espuma, la pintica y la fiesta de fraternidad en las calles."
         }
       }
     },
@@ -183,6 +190,8 @@ const CARNAVAL_DATA = {
       icono: "🔭",
       colorPrimario: "#2979FF", // Azul cósmico espacial
       colorGradiente: "linear-gradient(135deg, #0D47A1, #00E5FF)",
+      imagen: "assets/img/doctor_vodniza_y_matias.jpeg",
+      imagenCaption: "Gabriel Matías junto al Dr. Alberto Quijano Vodniza (Científico e Investigador NASA)",
       badgeLabel: "🔭 Orgullo Científico",
       tabCarnavalLabel: "<span>🚀</span> En la NASA / Reportaje",
       resumen: "Científico, físico y astrónomo nacido en Pasto, fundador y director del Observatorio Astronómico de la Universidad de Nariño. Es un referente mundial reconocido por la NASA por sus investigaciones en cometas y asteroides que cruzan cerca de la Tierra.",
@@ -197,7 +206,7 @@ const CARNAVAL_DATA = {
         nino: {
           titulo: "El Expositor Explica: La Vida del Dr. Quijano",
           tipo: "local_o_youtube",
-          url: "https://fjimenezg.github.io/web_carnaval/assets/video/presentacion_alberto_quijano_vodniza.mp4",
+          url: "assets/video/presentacion_alberto_quijano_vodniza.mp4",
           descripcion: "El estudiante explica cómo la curiosidad y la ciencia enaltecen a Pasto ante el mundo."
         },
         carnaval: {

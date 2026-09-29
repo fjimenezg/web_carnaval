@@ -1,6 +1,6 @@
 # 🎭 Carnaval de Negros y Blancos de Pasto - Exposición Interactiva
 
-Una aplicación web moderna, interactiva y optimizada para dispositivos móviles diseñada para la **Feria de la Ciencia y la Cultura**. Permite a los visitantes del stand escanear códigos QR en una cartelera física y acceder al instante a videos explicativos del niño expositor, clips del desfile real, datos culturales sobre carrozas, murgas, comparsas y colectivos, además de una mini-trivia lúdica y el juego interactivo de "La Pintica".
+Una aplicación web moderna, interactiva y optimizada para dispositivos móviles diseñada para la **Feria de la Ciencia Ambiental 2026**. Permite a los visitantes del stand escanear códigos QR en una cartelera física y acceder al instante a videos explicativos del niño expositor, clips del desfile real, datos culturales sobre carrozas, murgas, comparsas y Pericles Carnaval, además de una mini-trivia lúdica y el juego interactivo de "La Pintica".
 
 ---
 
@@ -67,7 +67,7 @@ Toda la información y los enlaces están centralizados en un único archivo:
 ```javascript
 standInfo: {
   titulo: "Carnaval de Negros y Blancos de Pasto",
-  subtitulo: "Feria de la Ciencia y la Cultura",
+  subtitulo: "Feria de la Ciencia Ambiental 2026",
   expositor: "Stand de Juanito Pérez - Grado 4B", // <- Cambia el nombre aquí
   ...
 }

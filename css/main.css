@@ -99,7 +99,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 800px;
+  max-width: 1120px;
   margin: 0 auto 1.5rem;
   padding: 0.5rem 0.75rem;
   background: var(--bg-surface);
@@ -154,33 +154,249 @@ body {
   box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
 }
 
+/* ==========================================================================
+   HERO CONTAINER Y AFICHE OFICIAL DEL PROYECTO
+   ========================================================================== */
+.hero-container {
+  display: grid;
+  grid-template-columns: minmax(280px, 350px) 1fr;
+  align-items: center;
+  gap: 2.5rem;
+  max-width: 1120px;
+  margin: 0 auto 1.5rem;
+  padding: 0 0.5rem;
+  text-align: left;
+}
+
+.hero-project-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+.project-poster-glow {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 0, 127, 0.4), rgba(255, 183, 3, 0.35), rgba(0, 245, 212, 0.25), transparent 75%);
+  filter: blur(28px);
+  border-radius: var(--radius-lg);
+  z-index: 0;
+  pointer-events: none;
+  animation: glowPulse 5s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.65; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1.04); }
+}
+
+.project-poster-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(22, 14, 38, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem;
+  box-shadow: 
+    0 12px 30px -5px rgba(0, 0, 0, 0.65),
+    0 0 35px rgba(255, 0, 127, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  overflow: hidden;
+  user-select: none;
+}
+
+.project-poster-card:hover, .project-poster-card:focus-visible {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(255, 183, 3, 0.65);
+  box-shadow: 
+    0 22px 40px -8px rgba(0, 0, 0, 0.75),
+    0 0 45px rgba(255, 183, 3, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  outline: none;
+}
+
+.project-poster-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+  padding: 0 0.15rem;
+}
+
+.project-poster-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-carnaval-yellow);
+  background: rgba(255, 183, 3, 0.15);
+  border: 1px solid rgba(255, 183, 3, 0.35);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.project-poster-badge .badge-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--color-carnaval-yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-carnaval-yellow);
+  animation: blinkDot 2s infinite ease-in-out;
+}
+
+@keyframes blinkDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.poster-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.project-poster-card:hover .poster-zoom-btn {
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-carnaval-pink), var(--color-carnaval-purple));
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 0, 127, 0.4);
+}
+
+.project-poster-img-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.project-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-poster-card:hover .project-poster-img {
+  transform: scale(1.035);
+}
+
+.poster-overlay-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.project-poster-footer {
+  margin-top: 0.75rem;
+  padding: 0 0.15rem;
+  text-align: center;
+}
+
+.project-meta-school {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.3px;
+}
+
+.project-meta-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.project-meta-pill {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+
 .hero-banner {
   max-width: 680px;
-  margin: 0 auto;
+  margin: 0;
+}
+
+.hero-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .hero-badge-festivo {
-  display: inline-block;
-  background: linear-gradient(90deg, var(--color-carnaval-pink), var(--color-carnaval-orange));
-  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--font-heading);
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  padding: 0.35rem 1rem;
-  border-radius: var(--radius-full);
-  margin-bottom: 0.75rem;
-  box-shadow: var(--shadow-sm);
-  animation: pulseBadge 3s infinite ease-in-out;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.08);
+  border: 1px solid rgba(255, 209, 102, 0.25);
+  border-left: 3px solid #ffbe0b;
+  border-radius: 4px;
+  padding: 0.35rem 0.8rem;
+  margin-bottom: 0;
+  box-shadow: none;
+  backdrop-filter: blur(8px);
+  user-select: none;
+  pointer-events: none;
 }
 
-@keyframes pulseBadge {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
+.hero-badge-festivo .badge-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.hero-badge-festivo .badge-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #1a1a1a;
+  background: #ffd166;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  margin-left: 0.25rem;
 }
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 6vw, 2.75rem);
+  font-size: clamp(1.8rem, 5.5vw, 2.6rem);
   font-weight: 700;
   line-height: 1.15;
   margin-bottom: 0.75rem;
@@ -195,8 +411,6 @@ body {
   color: var(--text-secondary);
   margin-bottom: 1.25rem;
   max-width: 540px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .hero-lema {
@@ -219,11 +433,40 @@ body {
    ========================================================================== */
 .quick-triggers {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.75rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
-  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.75rem;
+  }
+
+  .hero-banner {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-top-row {
+    justify-content: center;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quick-triggers {
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .btn-trigger {
@@ -384,6 +627,111 @@ body {
 
 .category-card:hover::after {
   opacity: 1;
+}
+
+/* ==========================================================================
+   FOTOS DESTACADAS DEL NIÑO EXPOSITOR EN TARJETAS Y MODALES
+   ========================================================================== */
+.card-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 135px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  background: radial-gradient(circle at center, rgba(38, 22, 58, 0.75) 0%, rgba(12, 6, 22, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.card-photo-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  transition: transform 0.4s var(--ease-spring);
+  display: block;
+}
+
+.category-card:hover .card-photo-img {
+  transform: scale(1.05);
+}
+
+.card-photo-badge {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(12, 6, 26, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.card-photo-badge .photo-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-carnaval-yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-carnaval-yellow);
+}
+
+/* Foto en el Modal Cultural */
+.modal-photo-container {
+  margin-bottom: 1.25rem;
+}
+
+.modal-photo-card {
+  position: relative;
+  background: radial-gradient(circle at center, rgba(35, 20, 55, 0.7) 0%, rgba(10, 5, 20, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-photo-img {
+  max-width: 100%;
+  max-height: 380px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  padding: 8px 8px 0;
+}
+
+.modal-photo-caption {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-carnaval-yellow);
+  background: rgba(18, 10, 32, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
 }
 
 .card-header {
@@ -668,6 +1016,87 @@ body {
   max-width: 380px;
 }
 
+/* Acciones y barra de información de video */
+.video-external-actions {
+  margin-top: 0.65rem;
+}
+
+.video-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.85rem;
+  backdrop-filter: blur(8px);
+}
+
+.video-info-title {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.btn-open-youtube {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #e50914, #b20710);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+}
+
+.btn-open-youtube:hover {
+  background: #ff0000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.5);
+  color: #fff;
+}
+
+.video-info-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.tab-badge-ready {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: rgba(34, 197, 94, 0.22);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  padding: 2px 7px;
+  border-radius: 999px;
+  line-height: 1.2;
+}
+
+.tab-badge-pending {
+  font-size: 0.65rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  padding: 2px 7px;
+  border-radius: 999px;
+  line-height: 1.2;
+}
+
 /* Contenido cultural dentro del modal */
 .cultural-info {
   margin-top: 1.25rem;
@@ -940,6 +1369,110 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* ==========================================================================
+   LIGHTBOX MODAL PARA VISTA AMPLIADA DEL AFICHE
+   ========================================================================== */
+.poster-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.poster-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 5, 18, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+
+.lightbox-content {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+  width: 100%;
+  background: rgba(25, 15, 45, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 50px rgba(255, 0, 127, 0.35);
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster-lightbox.active .lightbox-content {
+  transform: scale(1) translateY(0);
+}
+
+.btn-close-lightbox {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 40px;
+  height: 40px;
+  background: var(--color-carnaval-pink);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(255, 0, 127, 0.5);
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 2;
+}
+
+.btn-close-lightbox:hover {
+  transform: scale(1.1) rotate(90deg);
+  background: #ff1a8c;
+}
+
+.lightbox-img {
+  width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+  margin-top: 0.9rem;
+  text-align: center;
+  width: 100%;
+}
+
+.lightbox-caption h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--color-carnaval-yellow);
+  margin-bottom: 0.3rem;
+}
+
+.lightbox-caption p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
 }
 
 /* ==========================================================================

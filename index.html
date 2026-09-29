@@ -1,59 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#0d091a">
-  <meta name="description" content="Exposición interactiva sobre el Carnaval de Negros y Blancos de Pasto para la Feria de la Ciencia y la Cultura. Videos, historia, música y trivia.">
+  <meta name="description"
+    content="Exposición interactiva sobre el Carnaval de Negros y Blancos de Pasto para la Feria de la Ciencia Ambiental 2026. Videos, historia, música y trivia.">
   <meta name="author" content="Exposición Escolar Carnaval de Pasto">
 
   <title>Carnaval de Negros y Blancos de Pasto | Exposición Interactiva</title>
 
   <!-- Favicon de máscara festiva -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎭</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎭</text></svg>">
 
   <!-- Estilos principales -->
   <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
 
   <!-- ==========================================================================
        CABECERA Y HERO DE BIENVENIDA
        ========================================================================== -->
   <header class="site-header">
-    <div class="top-bar">
-      <div class="stand-badge" id="standBadge">
-        <span>🎪</span> Feria de la Ciencia y la Cultura
-      </div>
-      <div class="top-actions">
-        <button id="btnAudioToggle" class="btn-icon" aria-label="Activar o desactivar música tradicional">
-          <span id="audioIcon">🎵</span> <span id="audioLabel">Música</span>
-        </button>
-        <a href="imprimir.html" class="btn-icon" target="_blank" rel="noopener" title="Ver e imprimir códigos QR para la cartelera">
-          <span>🖨️</span> QRs
-        </a>
-      </div>
-    </div>
 
-    <div class="hero-banner">
-      <div class="hero-badge-festivo">PATRIMONIO CULTURAL DE LA HUMANIDAD</div>
-      <h1 class="hero-title" id="siteTitle">Carnaval de Negros y Blancos</h1>
-      <p class="hero-subtitle" id="siteSubtitle">
-        Exposición interactiva sobre la magia, los artesanos, las carrozas y la música de San Juan de Pasto.
-      </p>
-      <div class="hero-lema" id="siteLema">
-        <span>🎉</span> ¡Que viva Pasto, Carajo! <span>🎭</span>
-      </div>
-    </div>
 
-    <!-- Botones de Acción Rápida -->
-    <div class="quick-triggers">
-      <button id="btnPedirPintica" class="btn-trigger btn-pintica">
-        <span>🖤</span> ¡Pide tu Pintica!
-      </button>
-      <button id="btnIniciarTrivia" class="btn-trigger btn-trivia">
-        <span>🏆</span> Jugar Trivia del Carnaval
-      </button>
+
+    <div class="hero-container">
+      <!-- Tarjeta Destacada del Proyecto Escolar -->
+      <div class="hero-project-card-wrapper">
+        <div class="project-poster-glow"></div>
+        <div class="project-poster-card" id="projectPosterCard" tabindex="0" role="button"
+          aria-label="Ver afiche oficial del proyecto Chivita Carnavalera en tamaño completo">
+
+          <div class="project-poster-img-container">
+            <img src="assets/img/titulo_proyecto.png"
+              alt="Liceo de la Merced Maridíaz - Integrante: Gabriel Matías Jiménez Molina - Proyecto: Chivita Carnavalera"
+              class="project-poster-img" id="projectPosterImg" loading="eager" />
+            <div class="poster-overlay-shine"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Textos y botones del Hero -->
+      <div class="hero-banner">
+        <div class="hero-top-row">
+          <div class="hero-badge-festivo" aria-label="Distinción oficial: Patrimonio Cultural de la Humanidad UNESCO">
+            <span class="badge-icon">🏛️</span>
+            <span>Patrimonio Cultural de la Humanidad</span>
+            <span class="badge-tag">UNESCO</span>
+          </div>
+          <button id="btnAudioToggle" class="btn-icon" aria-label="Activar o desactivar música tradicional"
+            title="Escuchar Son Sureño (Música tradicional del Carnaval)">
+            <span id="audioIcon">🎵</span> <span id="audioLabel">Música</span>
+          </button>
+        </div>
+        <h1 class="hero-title" id="siteTitle">Carnaval de Negros y Blancos</h1>
+        <p class="hero-subtitle" id="siteSubtitle">
+          Exposición interactiva sobre la magia, los artesanos, las carrozas y la música de San Juan de Pasto.
+        </p>
+        <div class="hero-lema" id="siteLema">
+          <span>🎉</span> ¡Que viva Pasto, Carajo! <span>🎭</span>
+        </div>
+
+        <!-- Botones de Acción Rápida -->
+        <div class="quick-triggers">
+          <button id="btnPedirPintica" class="btn-trigger btn-pintica">
+            <span>🖤</span> ¡Pide tu Pintica!
+          </button>
+          <button id="btnIniciarTrivia" class="btn-trigger btn-trivia">
+            <span>🏆</span> Jugar Trivia del Carnaval
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -63,7 +84,6 @@
   <main class="main-container">
     <div class="section-heading">
       <h2><span>🎭🔭</span> Cultura y Ciencia de Pasto</h2>
-      <div class="qr-tip">💡 Toca o escanea un QR</div>
     </div>
 
     <!-- El listado de categorías se genera dinámicamente con JavaScript -->
@@ -107,6 +127,9 @@
 
         <!-- Información cultural detallada -->
         <div class="cultural-info">
+          <!-- Foto destacada del niño con el personaje (si aplica) -->
+          <div id="modalPhotoContainer" class="modal-photo-container" style="display: none;"></div>
+
           <div class="cultural-quote" id="modalQuote">«Frase destacada»</div>
 
           <p class="card-summary" id="modalResumen" style="-webkit-line-clamp: unset;"></p>
@@ -151,7 +174,8 @@
               <!-- Opciones inyectadas dinámicamente -->
             </div>
             <div class="trivia-feedback" id="triviaFeedback"></div>
-            <button id="btnSiguientePregunta" class="btn-trigger btn-trivia" style="width: 100%; justify-content: center; display: none;">
+            <button id="btnSiguientePregunta" class="btn-trigger btn-trivia"
+              style="width: 100%; justify-content: center; display: none;">
               Siguiente Pregunta ➔
             </button>
           </div>
@@ -174,6 +198,24 @@
   </div>
 
   <!-- ==========================================================================
+       MODAL LIGHTBOX PARA EL AFICHE DEL PROYECTO
+       ========================================================================== -->
+  <div class="poster-lightbox" id="posterLightbox" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="Afiche Oficial del Proyecto">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content">
+      <button class="btn-close-lightbox" id="btnCloseLightbox" aria-label="Cerrar vista ampliada">✕</button>
+      <img src="assets/img/titulo_proyecto.png" alt="Afiche Oficial - Liceo de la Merced Maridíaz - Chivita Carnavalera"
+        class="lightbox-img" />
+      <div class="lightbox-caption">
+        <h3>Liceo de la Merced Maridíaz</h3>
+        <p><strong>Expositor:</strong> Gabriel Matías Jiménez Molina &nbsp;•&nbsp; <strong>Proyecto:</strong> Chivita
+          Carnavalera</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        OVERLAY FESTIVO DE "LA PINTICA"
        ========================================================================== -->
   <div class="pintica-splash-overlay" id="pinticaOverlay">
@@ -184,8 +226,8 @@
     </div>
   </div>
 
-  <!-- Elemento de audio oculto para música tradicional -->
-  <audio id="audioCarnaval" loop preload="none">
+  <!-- Elemento de audio para música tradicional (Son Sureño de Pasto) -->
+  <audio id="audioCarnaval" loop preload="metadata" src="assets/audio/sonsureno.mp3">
     <source src="assets/audio/sonsureno.mp3" type="audio/mpeg">
   </audio>
 
@@ -194,12 +236,7 @@
        ========================================================================== -->
   <footer class="site-footer">
     <p id="footerStandDesc">Feria de la Ciencia y la Tecnología • Exposición Cultural</p>
-    <p style="margin-top: 0.35rem;">San Juan de Pasto, Nariño, Colombia</p>
-    <div>
-      <a href="imprimir.html" class="footer-link-qr" target="_blank" rel="noopener">
-        <span>🖨️</span> Descargar e imprimir tarjetas QR para la cartelera
-      </a>
-    </div>
+    <p id="footerSecretTrigger" style="margin-top: 0.35rem; user-select: none;">San Juan de Pasto, Nariño, Colombia</p>
   </footer>
 
   <!-- Scripts del sistema -->
@@ -209,4 +246,5 @@
   <script src="js/trivia.js"></script>
   <script src="js/app.js"></script>
 </body>
+
 </html>

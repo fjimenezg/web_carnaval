@@ -34,12 +34,20 @@
       if (audioIcon) audioIcon.textContent = "🔊";
       if (audioLabel) audioLabel.textContent = "Pausar";
 
-      // Intentar reproducir el elemento de audio HTML5
-      if (audioElement && audioElement.currentSrc) {
-        audioElement.play().catch((err) => {
-          console.log("No se pudo reproducir archivo local, activando melodía festiva sintética:", err);
-          startSynthMusic();
-        });
+      // Intentar reproducir el elemento de audio HTML5 (Son Sureño)
+      if (audioElement) {
+        audioElement.volume = 0.8;
+        const playPromise = audioElement.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              stopSynthMusic();
+            })
+            .catch((err) => {
+              console.log("Aviso de reproducción de audio:", err);
+              startSynthMusic();
+            });
+        }
       } else {
         startSynthMusic();
       }
@@ -56,6 +64,32 @@
       }
       stopSynthMusic();
     }
+
+    // Exponer utilidades para integración con modales y reproductores multimedia
+    window.isCarnavalMusicPlaying = function () {
+      return isPlaying;
+    };
+
+    window.pauseCarnavalMusicForVideo = function () {
+      if (isPlaying) {
+        if (audioElement && !audioElement.paused) {
+          audioElement.pause();
+        }
+        stopSynthMusic();
+        return true;
+      }
+      return false;
+    };
+
+    window.resumeCarnavalMusicAfterVideo = function (wasPlayingBefore) {
+      if (wasPlayingBefore && isPlaying) {
+        if (audioElement) {
+          audioElement.play().catch(() => {});
+        } else {
+          startSynthMusic();
+        }
+      }
+    };
 
     // ==========================================================================
     // SINTETIZADOR ANDINO DE RESPALDO (Web Audio API)
