@@ -32,7 +32,8 @@
     <!-- Ajuste de la URL de GitHub Pages -->
     <div class="url-config-box">
       <label for="inputBaseUrl">🌐 URL base del sitio web:</label>
-      <input type="text" id="inputBaseUrl" placeholder="https://tu-usuario.github.io/web_carnaval/">
+      <input type="text" id="inputBaseUrl" value="https://fjimenezg.github.io/web_carnaval/"
+        placeholder="https://fjimenezg.github.io/web_carnaval/">
       <button id="btnActualizarUrl" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">
         Actualizar QRs
       </button>
@@ -59,11 +60,15 @@
       const btnActualizarUrl = document.getElementById("btnActualizarUrl");
       const btnPrintCards = document.getElementById("btnPrintCards");
 
-      // 1. Determinar URL Base por defecto
-      let defaultBaseUrl = window.location.href.split("imprimir.html")[0];
-      if (defaultBaseUrl.startsWith("file://")) {
-        // Ejemplo para cuando se abre directamente el archivo local
-        defaultBaseUrl = "https://tu-usuario.github.io/web_carnaval/";
+      // 1. Determinar URL Base por defecto (URL real de publicación en GitHub Pages)
+      const PROD_URL = (typeof CARNAVAL_DATA !== "undefined" && CARNAVAL_DATA.standInfo && CARNAVAL_DATA.standInfo.sitioUrl)
+        ? CARNAVAL_DATA.standInfo.sitioUrl
+        : "https://fjimenezg.github.io/web_carnaval/";
+
+      let defaultBaseUrl = PROD_URL;
+      // Si ya está corriendo en el subdominio fjimenezg.github.io, usar la ubicación actual
+      if (window.location.origin.includes("fjimenezg.github.io")) {
+        defaultBaseUrl = window.location.href.split("imprimir.html")[0];
       }
 
       inputBaseUrl.value = defaultBaseUrl;
@@ -108,7 +113,7 @@
           subtitulo: "Juego Interactivo del Stand",
           url: `${cleanBase}#trivia`,
           cta: "¡Juega la Trivia!",
-          desc: "Responde 4 preguntas y conviértete en Embajador del Carnaval."
+          desc: "Responde 5 preguntas aleatorias y conviértete en Maestro del Carnaval."
         });
 
         return lista;
@@ -126,7 +131,6 @@
 
           card.innerHTML = `
             <div class="cut-icon">✂ Recortar</div>
-            <div class="card-badge-carnaval">Stand Escolar • Feria de la Ciencia ambiental 2026</div>
             <h2 class="qr-card-title">${item.icono} ${item.titulo}</h2>
             <div class="qr-card-subtitle">${item.subtitulo}</div>
             

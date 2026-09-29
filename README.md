@@ -40,7 +40,7 @@ El sitio es **100% estático** (HTML, CSS y JavaScript nativo), por lo que GitHu
    - Haz clic en **Save** (Guardar).
 3. **¡Listo!** En unos 60 segundos tu sitio estará en vivo en:
    ```
-   https://<tu-usuario>.github.io/web_carnaval/
+   https://fjimenezg.github.io/web_carnaval/
    ```
 
 ---
@@ -51,7 +51,8 @@ El sitio es **100% estático** (HTML, CSS y JavaScript nativo), por lo que GitHu
    ```
    imprimir.html
    ```
-2. En la barra superior, verifica que la casilla **URL base** tenga la dirección de tu web (ej: `https://<tu-usuario>.github.io/web_carnaval/`).
+2. En la barra superior, la casilla **URL base** ya tiene preconfigurada la dirección oficial:
+   `https://fjimenezg.github.io/web_carnaval/`
 3. Haz clic en el botón morado **🖨️ Imprimir Tarjetas**.
 4. Se abrirá el diálogo de impresión de tu navegador optimizado para papel Carta o A4.
 5. ¡Solo queda recortar por las líneas punteadas (`✂`) y pegarlas en la cartelera al lado de cada maqueta o dibujo!

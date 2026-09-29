@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="card-photo-wrapper">
               <img src="${cat.imagen}" alt="${cat.imagenCaption || cat.titulo}" class="card-photo-img" loading="lazy" />
               <div class="card-photo-badge">
-                <span class="photo-dot"></span> Encuentro con Matías
+                <span class="photo-dot"></span> Encuentro con Gabriel Matías
               </div>
             </div>
           ` : ""}
@@ -207,15 +207,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Actualizar tabs con etiquetas e indicadores de estado
     if (tabBtnNino) {
       const baseLabel = category.tabNinoLabel || `<span>👦</span> El Expositor Explica`;
-      const badge = hasNinoVideo 
-        ? `<span class="tab-badge-ready" title="Video grabado disponible">✓ Video</span>` 
+      const badge = hasNinoVideo
+        ? `<span class="tab-badge-ready" title="Video grabado disponible">✓ Video</span>`
         : `<span class="tab-badge-pending" title="Video en preparación">Próx.</span>`;
       tabBtnNino.innerHTML = `${baseLabel} ${badge}`;
     }
     if (tabBtnCarnaval) {
       const baseLabel = category.tabCarnavalLabel || `<span>🎬</span> En el Desfile Real`;
-      const badge = hasCarnavalVideo 
-        ? `<span class="tab-badge-ready" title="Video oficial disponible">✓ Video</span>` 
+      const badge = hasCarnavalVideo
+        ? `<span class="tab-badge-ready" title="Video oficial disponible">✓ Video</span>`
         : `<span class="tab-badge-pending">Próx.</span>`;
       tabBtnCarnaval.innerHTML = `${baseLabel} ${badge}`;
     }

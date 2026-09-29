@@ -7,7 +7,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     if (typeof CARNAVAL_DATA === "undefined" || !CARNAVAL_DATA.trivia) return;
 
-    const triviaList = CARNAVAL_DATA.trivia;
+    let triviaList = [];
     let currentIndex = 0;
     let score = 0;
     let hasAnswered = false;
@@ -24,15 +24,45 @@
     const triviaOptionsContainer = document.getElementById("triviaOptionsContainer");
     const triviaFeedback = document.getElementById("triviaFeedback");
     const btnSiguientePregunta = document.getElementById("btnSiguientePregunta");
+    const triviaTrophy = document.getElementById("triviaTrophy");
+    const triviaResultTitle = document.getElementById("triviaResultTitle");
     const triviaFinalScore = document.getElementById("triviaFinalScore");
+    const triviaResultMessage = document.getElementById("triviaResultMessage");
     const btnReiniciarTrivia = document.getElementById("btnReiniciarTrivia");
 
     if (!triviaModal) return;
 
     // ==========================================================================
+    // SELECCIÓN ALEATORIA DE PREGUNTAS Y OPCIONES
+    // ==========================================================================
+    function mezclarArreglo(arr) {
+      const copia = [...arr];
+      for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+      }
+      return copia;
+    }
+
+    function prepararPreguntasTrivia(cantidad = 5) {
+      const todas = CARNAVAL_DATA.trivia || [];
+      const totalDeseado = Math.min(cantidad, todas.length);
+      // Seleccionar preguntas aleatorias sin repetición
+      const seleccionadas = mezclarArreglo(todas).slice(0, totalDeseado);
+
+      // Mezclar las opciones de cada pregunta para variar su posición
+      return seleccionadas.map((item) => ({
+        ...item,
+        opciones: mezclarArreglo(item.opciones)
+      }));
+    }
+
+    // ==========================================================================
     // APERTURA Y CIERRE
     // ==========================================================================
     function abrirTrivia() {
+      // Cargar 5 preguntas aleatorias cada vez que se inicia la trivia
+      triviaList = prepararPreguntasTrivia(5);
       currentIndex = 0;
       score = 0;
       hasAnswered = false;
@@ -192,9 +222,45 @@
         triviaFinalScore.textContent = `Has respondido correctamente ${score} de ${total} preguntas.`;
       }
 
-      // Lanzar lluvia de confetti festivo
-      lanzarConfetti();
-      reproducirFanfarria();
+      if (score >= 4) {
+        // Acierto sobresaliente (4 o 5 correctas): Felicitación
+        if (triviaTrophy) triviaTrophy.textContent = score === 5 ? "🏆" : "🥇";
+        if (triviaResultTitle) {
+          triviaResultTitle.textContent = score === 5
+            ? "¡Puntaje Perfecto! ¡Gran Maestro del Carnaval!"
+            : "¡Felicitaciones! ¡Excelente Conocimiento!";
+        }
+        if (triviaResultMessage) {
+          triviaResultMessage.innerHTML = score === 5
+            ? "«¡Extraordinario! Conoces a la perfección el alma, la historia y la alegría de nuestro Carnaval de Pasto. ¡Eres un auténtico embajador de nuestra cultura!»"
+            : "«¡Muy bien hecho! Tienes un conocimiento sobresaliente de nuestras tradiciones, carrozas, murgas y comparsas. ¡Cultura y orgullo pastuso!»";
+          triviaResultMessage.style.borderLeftColor = "var(--color-carnaval-yellow)";
+        }
+        if (btnReiniciarTrivia) {
+          btnReiniciarTrivia.textContent = "🔄 Volver a Jugar";
+        }
+
+        // Celebración con confetti festivo y fanfarria triunfal
+        lanzarConfetti();
+        reproducirFanfarria();
+      } else {
+        // Puntaje bajo (0 a 3 correctas): Invitar a seguir intentando
+        if (triviaTrophy) triviaTrophy.textContent = "🎭";
+        if (triviaResultTitle) {
+          triviaResultTitle.textContent = "¡Buen intento carnavalero!";
+        }
+        if (triviaResultMessage) {
+          triviaResultMessage.innerHTML =
+            "«¡El Carnaval se aprende y se goza paso a paso! Te invitamos a explorar las fichas interactivas y videos del stand para descubrir más secretos de la fiesta y volverlo a intentar. ¡Tú puedes lograr la máxima puntuación!»";
+          triviaResultMessage.style.borderLeftColor = "var(--color-carnaval-cyan, #00e5ff)";
+        }
+        if (btnReiniciarTrivia) {
+          btnReiniciarTrivia.textContent = "🔄 ¡Intentarlo de Nuevo!";
+        }
+
+        // Tono amable y estimulante para motivar al participante
+        reproducirSonidoAnimo();
+      }
     }
 
     if (btnReiniciarTrivia) {
@@ -253,6 +319,26 @@
           gain.connect(ctx.destination);
           osc.start(ctx.currentTime + i * 0.12);
           osc.stop(ctx.currentTime + i * 0.12 + 0.4);
+        });
+      } catch (e) {}
+    }
+
+    function reproducirSonidoAnimo() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioCtx();
+        const notas = [392.0, 440.0, 523.25]; // Melodía suave Sol4 - La4 - Do5
+        notas.forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.12, ctx.currentTime + i * 0.14);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.14 + 0.3);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.14);
+          osc.stop(ctx.currentTime + i * 0.14 + 0.3);
         });
       } catch (e) {}
     }
