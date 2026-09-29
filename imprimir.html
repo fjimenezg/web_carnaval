@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fichas QR para Cartelera Escolar | Carnaval de Pasto</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖨️</text></svg>">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       BARRA DE CONTROL PARA CONFIGURACIÓN E IMPRESIÓN
+       (Se oculta automáticamente al imprimir)
+       ========================================================================== -->
+  <div class="print-toolbar">
+    <div class="toolbar-header">
+      <div class="toolbar-title">
+        <h1>🖨️ Fichas con Códigos QR para la Cartelera</h1>
+        <p>Listas para imprimir en papel Carta/A4, recortar por las líneas punteadas y pegar en el stand escolar.</p>
+      </div>
+      <div class="toolbar-actions">
+        <a href="index.html" class="btn-secondary">⬅ Volver al Sitio Web</a>
+        <button id="btnPrintCards" class="btn-print">🖨️ Imprimir Tarjetas</button>
+      </div>
+    </div>
+
+    <!-- Ajuste de la URL de GitHub Pages -->
+    <div class="url-config-box">
+      <label for="inputBaseUrl">🌐 URL base del sitio web:</label>
+      <input type="text" id="inputBaseUrl" placeholder="https://tu-usuario.github.io/web_carnaval/">
+      <button id="btnActualizarUrl" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">
+        Actualizar QRs
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       HOJA DE TARJETAS QR RECORTABLES
+       ========================================================================== -->
+  <main class="sheet-container">
+    <div class="cards-grid" id="cardsGrid">
+      <!-- Generado dinámicamente con qrcode.min.js y carnaval-data.js -->
+    </div>
+  </main>
+
+  <!-- Bibliotecas necesarias -->
+  <script src="data/carnaval-data.js"></script>
+  <script src="js/qrcode.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cardsGrid = document.getElementById("cardsGrid");
+      const inputBaseUrl = document.getElementById("inputBaseUrl");
+      const btnActualizarUrl = document.getElementById("btnActualizarUrl");
+      const btnPrintCards = document.getElementById("btnPrintCards");
+
+      // 1. Determinar URL Base por defecto
+      let defaultBaseUrl = window.location.href.split("imprimir.html")[0];
+      if (defaultBaseUrl.startsWith("file://")) {
+        // Ejemplo para cuando se abre directamente el archivo local
+        defaultBaseUrl = "https://tu-usuario.github.io/web_carnaval/";
+      }
+      
+      inputBaseUrl.value = defaultBaseUrl;
+
+      // 2. Definir lista completa de tarjetas a imprimir
+      function obtenerTarjetas(baseUrl) {
+        // Limpiar slash final para evitar dobles barras
+        const cleanBase = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+
+        const lista = [
+          {
+            id: "general",
+            titulo: "Carnaval de Pasto",
+            icono: "🎭",
+            subtitulo: "Portal General de la Exposición",
+            url: cleanBase,
+            cta: "¡Escanéame con tu celular!",
+            desc: "Accede a la exposición completa, videos, música tradicional y trivia."
+          }
+        ];
+
+        // Añadir cada categoría cultural
+        if (typeof CARNAVAL_DATA !== "undefined" && CARNAVAL_DATA.categorias) {
+          CARNAVAL_DATA.categorias.forEach((cat) => {
+            lista.push({
+              id: cat.id,
+              titulo: cat.nombreCorto || cat.titulo,
+              icono: cat.icono,
+              subtitulo: cat.subtitulo,
+              url: `${cleanBase}#${cat.id}`,
+              cta: `¡Aprende sobre ${cat.nombreCorto}!`,
+              desc: `Descubre videos, qué son y datos curiosos de ${cat.nombreCorto.toLowerCase()}.`
+            });
+          });
+        }
+
+        // Añadir tarjeta de la trivia
+        lista.push({
+          id: "trivia",
+          titulo: "Trivia del Carnaval",
+          icono: "🏆",
+          subtitulo: "Juego Interactivo del Stand",
+          url: `${cleanBase}#trivia`,
+          cta: "¡Juega la Trivia!",
+          desc: "Responde 4 preguntas y conviértete en Embajador del Carnaval."
+        });
+
+        return lista;
+      }
+
+      // 3. Renderizar tarjetas y sus códigos QR
+      function renderizarTarjetas() {
+        cardsGrid.innerHTML = "";
+        const baseUrl = inputBaseUrl.value.trim() || defaultBaseUrl;
+        const tarjetas = obtenerTarjetas(baseUrl);
+
+        tarjetas.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "qr-print-card";
+          
+          card.innerHTML = `
+            <div class="cut-icon">✂ Recortar</div>
+            <div class="card-badge-carnaval">Stand Escolar • Feria de la Ciencia</div>
+            <h2 class="qr-card-title">${item.icono} ${item.titulo}</h2>
+            <div class="qr-card-subtitle">${item.subtitulo}</div>
+            
+            <div class="qr-card-canvas-box" id="qrContainer-${item.id}"></div>
+            
+            <div class="qr-card-cta">${item.cta}</div>
+            <p class="qr-card-desc">${item.desc}</p>
+            <div class="qr-card-url">${item.url}</div>
+          `;
+
+          cardsGrid.appendChild(card);
+
+          // Generar código QR usando QRCode.js
+          setTimeout(() => {
+            const container = document.getElementById(`qrContainer-${item.id}`);
+            if (container && typeof QRCode !== "undefined") {
+              new QRCode(container, {
+                text: item.url,
+                width: 150,
+                height: 150,
+                colorDark: "#0b0817",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.M
+              });
+            }
+          }, 10 * index);
+        });
+      }
+
+      // Eventos
+      btnActualizarUrl.addEventListener("click", () => {
+        renderizarTarjetas();
+      });
+
+      inputBaseUrl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          renderizarTarjetas();
+        }
+      });
+
+      btnPrintCards.addEventListener("click", () => {
+        window.print();
+      });
+
+      // Render inicial
+      renderizarTarjetas();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0d091a">
+  <meta name="description" content="Exposición interactiva sobre el Carnaval de Negros y Blancos de Pasto para la Feria de la Ciencia y la Cultura. Videos, historia, música y trivia.">
+  <meta name="author" content="Exposición Escolar Carnaval de Pasto">
+
+  <title>Carnaval de Negros y Blancos de Pasto | Exposición Interactiva</title>
+
+  <!-- Favicon de máscara festiva -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎭</text></svg>">
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       CABECERA Y HERO DE BIENVENIDA
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="top-bar">
+      <div class="stand-badge" id="standBadge">
+        <span>🎪</span> Feria de la Ciencia y la Cultura
+      </div>
+      <div class="top-actions">
+        <button id="btnAudioToggle" class="btn-icon" aria-label="Activar o desactivar música tradicional">
+          <span id="audioIcon">🎵</span> <span id="audioLabel">Música</span>
+        </button>
+        <a href="imprimir.html" class="btn-icon" target="_blank" rel="noopener" title="Ver e imprimir códigos QR para la cartelera">
+          <span>🖨️</span> QRs
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-banner">
+      <div class="hero-badge-festivo">PATRIMONIO CULTURAL DE LA HUMANIDAD</div>
+      <h1 class="hero-title" id="siteTitle">Carnaval de Negros y Blancos</h1>
+      <p class="hero-subtitle" id="siteSubtitle">
+        Exposición interactiva sobre la magia, los artesanos, las carrozas y la música de San Juan de Pasto.
+      </p>
+      <div class="hero-lema" id="siteLema">
+        <span>🎉</span> ¡Que viva Pasto, Carajo! <span>🎭</span>
+      </div>
+    </div>
+
+    <!-- Botones de Acción Rápida -->
+    <div class="quick-triggers">
+      <button id="btnPedirPintica" class="btn-trigger btn-pintica">
+        <span>🖤</span> ¡Pide tu Pintica!
+      </button>
+      <button id="btnIniciarTrivia" class="btn-trigger btn-trivia">
+        <span>🏆</span> Jugar Trivia del Carnaval
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SECCIÓN PRINCIPAL: CATEGORÍAS CULTURALES
+       ========================================================================== -->
+  <main class="main-container">
+    <div class="section-heading">
+      <h2><span>🎭🔭</span> Cultura y Ciencia de Pasto</h2>
+      <div class="qr-tip">💡 Toca o escanea un QR</div>
+    </div>
+
+    <!-- El listado de categorías se genera dinámicamente con JavaScript -->
+    <div class="categories-grid" id="categoriesGrid" role="list">
+      <!-- Inyectado por app.js -->
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL DE DETALLE Y REPRODUCTOR DE DOBLE VIDEO
+       ========================================================================== -->
+  <div class="modal-overlay" id="culturalModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" id="modalIcon">🎭</span>
+          <div>
+            <h2 id="modalTitle">Título de la Categoría</h2>
+            <div class="card-subtitle" id="modalSubtitle">Subtítulo explicativo</div>
+          </div>
+        </div>
+        <button class="btn-close-modal" id="btnCloseModal" aria-label="Cerrar ventana">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Pestañas de doble video -->
+        <div class="video-tabs-wrapper">
+          <div class="video-tabs" role="tablist">
+            <button class="video-tab-btn active" id="tabBtnNino" role="tab" aria-selected="true">
+              <span>👦</span> El Expositor Explica
+            </button>
+            <button class="video-tab-btn" id="tabBtnCarnaval" role="tab" aria-selected="false">
+              <span>🎬</span> En el Desfile Real
+            </button>
+          </div>
+
+          <div class="video-frame-container" id="videoContainer">
+            <!-- Reproductor de video inyectado dinámicamente (iframe o video) -->
+          </div>
+        </div>
+
+        <!-- Información cultural detallada -->
+        <div class="cultural-info">
+          <div class="cultural-quote" id="modalQuote">«Frase destacada»</div>
+
+          <p class="card-summary" id="modalResumen" style="-webkit-line-clamp: unset;"></p>
+
+          <div class="cultural-points-title">
+            <span>✨</span> Lo más importante:
+          </div>
+          <div class="points-list" id="modalPointsList">
+            <!-- Puntos clave inyectados dinámicamente -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE LA TRIVIA INTERACTIVA
+       ========================================================================== -->
+  <div class="modal-overlay" id="triviaModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-container" style="max-width: 580px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">🏆</span>
+          <div>
+            <h2>Trivia del Carnaval</h2>
+            <div class="card-subtitle">Demuestra cuánto sabes sobre Pasto</div>
+          </div>
+        </div>
+        <button class="btn-close-modal" id="btnCloseTrivia" aria-label="Cerrar trivia">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="trivia-box" id="triviaBox">
+          <!-- Pantalla activa de pregunta -->
+          <div id="triviaQuestionScreen">
+            <div class="trivia-progress-bar">
+              <div class="trivia-progress-fill" id="triviaProgressFill"></div>
+            </div>
+            <div class="trivia-counter" id="triviaCounter">Pregunta 1 de 4</div>
+            <div class="trivia-question" id="triviaQuestionText">¿Pregunta?</div>
+            <div class="trivia-options" id="triviaOptionsContainer">
+              <!-- Opciones inyectadas dinámicamente -->
+            </div>
+            <div class="trivia-feedback" id="triviaFeedback"></div>
+            <button id="btnSiguientePregunta" class="btn-trigger btn-trivia" style="width: 100%; justify-content: center; display: none;">
+              Siguiente Pregunta ➔
+            </button>
+          </div>
+
+          <!-- Pantalla de resultados finales -->
+          <div id="triviaResultScreen" class="trivia-result-screen" style="display: none;">
+            <div class="trivia-trophy">🏅</div>
+            <h3>¡Felicitaciones!</h3>
+            <p id="triviaFinalScore">Has respondido correctamente 4 de 4 preguntas.</p>
+            <div class="cultural-quote" style="margin-bottom: 1.5rem;">
+              «¡Eres un auténtico Embajador de la Cultura y el Carnaval de Pasto!»
+            </div>
+            <button id="btnReiniciarTrivia" class="btn-trigger btn-pintica" style="margin: 0 auto;">
+              🔄 Volver a Jugar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       OVERLAY FESTIVO DE "LA PINTICA"
+       ========================================================================== -->
+  <div class="pintica-splash-overlay" id="pinticaOverlay">
+    <div class="pintica-splat">
+      <div style="font-size: 2.5rem; margin-bottom: 0.25rem;">🎭🖤</div>
+      <h3>¡Una Pintica por favor!</h3>
+      <p>¡Que vivan los Negros!</p>
+    </div>
+  </div>
+
+  <!-- Elemento de audio oculto para música tradicional -->
+  <audio id="audioCarnaval" loop preload="none">
+    <source src="assets/audio/sonsureno.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ==========================================================================
+       PIE DE PÁGINA
+       ========================================================================== -->
+  <footer class="site-footer">
+    <p id="footerStandDesc">Feria de la Ciencia y la Tecnología • Exposición Cultural</p>
+    <p style="margin-top: 0.35rem;">San Juan de Pasto, Nariño, Colombia</p>
+    <div>
+      <a href="imprimir.html" class="footer-link-qr" target="_blank" rel="noopener">
+        <span>🖨️</span> Descargar e imprimir tarjetas QR para la cartelera
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scripts del sistema -->
+  <script src="data/carnaval-data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/pintica.js"></script>
+  <script src="js/trivia.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

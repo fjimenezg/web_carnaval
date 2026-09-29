@@ -1,0 +1,287 @@
+/* ==========================================================================
+   ESTILOS DE IMPRESIÓN Y GENERADOR DE FICHAS QR
+   Optimizado para vista previa en pantalla y corte en papel Carta/A4
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Fredoka:wght@600;700&display=swap');
+
+:root {
+  --color-carnaval-pink: #ff007f;
+  --color-carnaval-yellow: #ffb703;
+  --color-carnaval-blue: #00bcd4;
+  --color-carnaval-purple: #7b2cbf;
+  --color-carnaval-green: #4caf50;
+  --font-heading: 'Fredoka', system-ui, sans-serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #f4f4f9;
+  color: #222;
+  padding: 1.5rem;
+}
+
+/* ==========================================================================
+   BARRA DE HERRAMIENTAS (PANTALLA)
+   ========================================================================== */
+.print-toolbar {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  background: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.toolbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.toolbar-title h1 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: #1a1a2e;
+}
+
+.toolbar-title p {
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, var(--color-carnaval-pink), var(--color-carnaval-purple));
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 0, 127, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.btn-print:hover {
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f1f5f9;
+  color: #334155;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.url-config-box {
+  background: #f8fafc;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.url-config-box label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.url-config-box input {
+  flex: 1;
+  min-width: 260px;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.88rem;
+}
+
+/* ==========================================================================
+   CONTENEDOR DE TARJETAS PARA IMPRESIÓN
+   ========================================================================== */
+.sheet-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjeta individual recortable */
+.qr-print-card {
+  background: #ffffff;
+  border: 2px dashed #94a3b8;
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Guía de tijera */
+.cut-icon {
+  position: absolute;
+  top: -12px;
+  right: 15px;
+  background: #ffffff;
+  padding: 0 4px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.card-badge-carnaval {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-carnaval-pink);
+  background: rgba(255, 0, 127, 0.08);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.qr-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.qr-card-subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 0.85rem;
+}
+
+.qr-card-canvas-box {
+  background: #ffffff;
+  padding: 0.65rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 0.85rem;
+  width: 170px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-card-canvas-box img,
+.qr-card-canvas-box canvas {
+  width: 150px !important;
+  height: 150px !important;
+  display: block;
+}
+
+.qr-card-cta {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+.qr-card-desc {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.3;
+}
+
+.qr-card-url {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  margin-top: 0.5rem;
+  font-family: monospace;
+  word-break: break-all;
+}
+
+/* ==========================================================================
+   REGLAS DE IMPRESIÓN (@media print)
+   ========================================================================== */
+@media print {
+  body {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-toolbar {
+    display: none !important;
+  }
+
+  .sheet-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5cm !important;
+    page-break-inside: auto;
+  }
+
+  .qr-print-card {
+    border: 1.5px dashed #555 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 0.5cm;
+  }
+
+  .cut-icon {
+    display: block !important;
+  }
+
+  @page {
+    size: letter portrait;
+    margin: 1.2cm;
+  }
+}
