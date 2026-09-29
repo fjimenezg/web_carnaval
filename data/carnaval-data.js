@@ -197,7 +197,7 @@ const CARNAVAL_DATA = {
         nino: {
           titulo: "El Expositor Explica: La Vida del Dr. Quijano",
           tipo: "local_o_youtube",
-          url: "../assets/videos/presentacion_alberto_quijano_vodniza.mp4",
+          url: "https://fjimenezg.github.io/web_carnaval/assets/video/presentacion_alberto_quijano_vodniza.mp4",
           descripcion: "El estudiante explica cómo la curiosidad y la ciencia enaltecen a Pasto ante el mundo."
         },
         carnaval: {
